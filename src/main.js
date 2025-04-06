@@ -1,5 +1,5 @@
-import WaveSurfer from '../node_modules/wavesurfer.js/dist/wavesurfer.esm.js';
-import RegionsPlugin from '../node_modules/wavesurfer.js/dist/plugins/regions.esm.js';
+import WaveSurfer from 'wavesurfer.js';
+import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.js';
 
 let wavesurfer = null;
 let audioContext = null;
