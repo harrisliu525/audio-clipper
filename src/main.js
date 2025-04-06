@@ -133,14 +133,25 @@ function handleDrop(event) {
     event.stopPropagation();
     
     const file = event.dataTransfer.files[0];
-    if (file && (file.type === 'audio/mp3' || file.type === 'audio/wav')) {
+    const supportedTypes = [
+        'audio/mp3', 
+        'audio/wav', 
+        'audio/ogg', 
+        'audio/aac', 
+        'audio/flac', 
+        'audio/x-m4a', 
+        'audio/mp4',
+        'audio/mpeg'
+    ];
+    
+    if (file && (supportedTypes.includes(file.type) || file.name.match(/\.(mp3|wav|ogg|aac|flac|m4a)$/i))) {
         if (file.size > 100 * 1024 * 1024) {
             showToast('File size cannot exceed 100MB', 'error');
             return;
         }
         loadAudioFile(file);
     } else {
-        showToast('Please upload an MP3 or WAV audio file', 'error');
+        showToast('Please upload a supported audio file format', 'error');
     }
 
     // Reset drop zone style
