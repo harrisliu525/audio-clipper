@@ -16,11 +16,16 @@ function initWaveSurfer() {
         height: 128,
         normalize: true,
         splitChannels: false,
-        minPxPerSec: 50,
-        plugins: [
-            RegionsPlugin.create()
-        ]
+        minPxPerSec: 50
     });
+
+    // 在WaveSurfer v7.7.3中，插件需要单独创建并存储
+    // 创建区域插件
+    const regionsPlugin = RegionsPlugin.create();
+    // 注册插件
+    wavesurfer.registerPlugin(regionsPlugin);
+    // 存储插件引用以便后续使用
+    wavesurfer.regionsPlugin = regionsPlugin;
 
     wavesurfer.on('ready', () => {
         document.getElementById('analyzeBtn').disabled = false;
@@ -167,17 +172,42 @@ async function loadAudioFile(file) {
 async function analyzeBreaths() {
     if (!audioBuffer) return;
 
-    const threshold = document.getElementById('threshold').value / 100;
+    // 修改阈值计算，阈值应该基于整体音频的平均能量
+    const sensitivityPercent = document.getElementById('threshold').value; // 0-100
     const minDuration = document.getElementById('minDuration').value;
     
     updateProgress(10);
     const data = audioBuffer.getChannelData(0);
     const sampleRate = audioBuffer.sampleRate;
     
+    // 计算整个音频的平均RMS能量
+    let totalRms = 0;
+    let rmsWindow = Math.floor(sampleRate * 0.02); // 20ms窗口
+    let windowCount = 0;
+    
+    for (let i = 0; i < data.length; i += rmsWindow) {
+        let sum = 0;
+        let count = 0;
+        for (let j = 0; j < rmsWindow && (i + j) < data.length; j++) {
+            sum += data[i + j] * data[i + j];
+            count++;
+        }
+        if (count > 0) {
+            totalRms += Math.sqrt(sum / count);
+            windowCount++;
+        }
+    }
+    
+    const avgRms = totalRms / windowCount;
+    // 基于平均RMS和灵敏度百分比计算阈值
+    // 灵敏度越高，阈值相对于平均RMS越低，更容易检测到气口
+    const threshold = avgRms * (1 - sensitivityPercent / 100);
+    
+    console.log(`平均RMS: ${avgRms}, 阈值: ${threshold}, 灵敏度: ${sensitivityPercent}%`);
+    
     breathMarkers = [];
     let isBreath = false;
     let breathStart = 0;
-    let rmsWindow = Math.floor(sampleRate * 0.02); // 20ms窗口
     
     for (let i = 0; i < data.length; i += rmsWindow) {
         // 计算RMS能量
@@ -210,25 +240,39 @@ async function analyzeBreaths() {
         }
     }
 
+    // 检查是否在音频结尾处有一个气口
+    if (isBreath) {
+        const breathDuration = (data.length - breathStart) / sampleRate * 1000;
+        if (breathDuration >= minDuration) {
+            breathMarkers.push({
+                start: breathStart / sampleRate,
+                end: data.length / sampleRate
+            });
+        }
+    }
+
     // 合并相近的气口标记
     breathMarkers = mergeCloseBreaths(breathMarkers, 0.1); // 100ms阈值
 
-    // 清除已有的标记（WaveSurfer.js v7.x版本不再有clearMarkers方法）
-    // 获取所有已存在的标记并删除它们
-    if (wavesurfer.regions) {
-        wavesurfer.regions.clear();
-    } else {
-        // 如果之前没有初始化regions插件，则初始化它
-        wavesurfer.registerPlugin(RegionsPlugin.create());
+    // 清除已有的区域标记
+    if (wavesurfer.regionsPlugin) {
+        // 获取所有区域
+        const regions = wavesurfer.regionsPlugin.getRegions();
+        // 移除每个区域
+        regions.forEach(region => {
+            region.remove();
+        });
     }
 
     // 标记气口位置
     breathMarkers.forEach(marker => {
-        wavesurfer.regions.add({
+        // 使用RegionsPlugin的addRegion方法
+        wavesurfer.regionsPlugin.addRegion({
             start: marker.start,
             end: marker.end,
-            color: '#ef4444',
-            label: 'Breath'
+            color: 'rgba(239, 68, 68, 0.3)',
+            drag: false,
+            resize: false
         });
     });
 
