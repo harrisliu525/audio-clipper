@@ -3,44 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AudioClipper - Professional Breath Removal Tool</title>
-    <meta name="description" content="Streamline your podcast and audiobook production with our AI-powered breath and pause removal tool. Create professional-grade audio in seconds.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        },
-                    },
-                    fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
+    <title>AudioBreath | Professional Breath Removal Tool</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-light: #3b82f6;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-900: #111827;
-            --success: #22c55e;
-            --error: #ef4444;
+            --primary: #0071e3;
+            --primary-light: #147ce5;
+            --primary-dark: #0051a2;
+            --black: #1d1d1f;
+            --dark-gray: #424245;
+            --medium-gray: #86868b;
+            --light-gray: #f5f5f7;
+            --white: #ffffff;
+            --success: #2fd158;
+            --error: #ff453a;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.5rem;
+            --font-size-2xl: 2rem;
+            --font-size-3xl: 3rem;
         }
 
         * {
@@ -50,57 +31,111 @@
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             line-height: 1.5;
-            color: var(--gray-900);
-            background-color: var(--gray-100);
+            color: var(--black);
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
         }
 
         header {
-            background-color: white;
-            padding: 1rem 0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1.5rem 0;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
         }
 
         h1 {
-            font-size: 1.5rem;
-            color: var(--gray-900);
+            font-size: var(--font-size-2xl);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
             margin-bottom: 0.5rem;
         }
 
+        .free-badge {
+            display: inline-block;
+            background-color: var(--success);
+            color: white;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            margin-left: 0.75rem;
+            vertical-align: middle;
+        }
+
         .description {
-            color: var(--gray-700);
+            font-size: var(--font-size-lg);
+            color: var(--medium-gray);
             margin-bottom: 1rem;
+            max-width: 700px;
+        }
+
+        .hero-section {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(180deg, var(--white) 0%, var(--light-gray) 100%);
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #0071e3 0%, #42a5f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: var(--font-size-xl);
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
         }
 
         .main-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
         }
 
         .upload-section {
-            border: 2px dashed var(--gray-200);
-            padding: 2rem;
+            border: 2px dashed rgba(0, 0, 0, 0.1);
+            padding: 3rem;
             text-align: center;
-            border-radius: 0.5rem;
-            margin-bottom: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
             transition: all 0.3s ease;
+            background-color: var(--light-gray);
+        }
+
+        .upload-section:hover {
+            border-color: var(--primary);
+            background-color: rgba(0, 113, 227, 0.05);
         }
 
         .waveform {
-            margin: 2rem 0;
-            background-color: var(--gray-100);
-            border-radius: 0.5rem;
-            padding: 1rem;
+            margin: 3rem 0;
+            background-color: var(--light-gray);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            min-height: 150px;
         }
 
         .controls {
@@ -112,44 +147,56 @@
         .button {
             background-color: var(--primary);
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 0.25rem;
+            border-radius: 2rem;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.2s;
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
         }
 
         .button:hover {
             background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.4);
+        }
+
+        .button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 113, 227, 0.3);
         }
 
         .button:disabled {
-            background-color: var(--gray-200);
+            background-color: var(--medium-gray);
             cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.7;
         }
 
         .parameters {
             display: grid;
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 2rem;
+            margin: 3rem 0;
         }
 
         .parameter-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1rem;
         }
 
         label {
             font-weight: 500;
-            color: var(--gray-700);
+            color: var(--dark-gray);
+            font-size: var(--font-size-base);
         }
 
         input[type="range"] {
             width: 100%;
             height: 6px;
-            background: var(--gray-200);
+            background: var(--light-gray);
             border-radius: 3px;
             outline: none;
             -webkit-appearance: none;
@@ -157,30 +204,32 @@
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
-            background: #0ea5e9;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
             border-radius: 50%;
             cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease;
         }
 
         input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.1);
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 113, 227, 0.3);
         }
 
         .progress {
-            height: 4px;
-            background-color: var(--gray-200);
-            border-radius: 2px;
+            height: 6px;
+            background-color: var(--light-gray);
+            border-radius: 3px;
             overflow: hidden;
-            margin: 1rem 0;
+            margin: 2rem 0;
             display: none;
         }
 
         .progress-bar {
             height: 100%;
-            background-color: var(--primary);
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
             width: 0%;
             transition: width 0.3s;
         }
@@ -190,13 +239,14 @@
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%) translateY(100%);
-            background-color: var(--primary);
+            background-color: var(--black);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.25rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
             z-index: 1000;
+            font-weight: 500;
         }
 
         .toast.error {
@@ -207,13 +257,62 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature {
+            padding: 2rem;
+            background-color: var(--light-gray);
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .feature-description {
+            color: var(--medium-gray);
+        }
+
         footer {
             text-align: center;
-            padding: 2rem 0;
-            color: var(--gray-700);
+            padding: 3rem 0;
+            color: var(--medium-gray);
+            background-color: var(--light-gray);
+        }
+
+        .free-notice {
+            background-color: rgba(47, 209, 88, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .free-notice p {
+            color: var(--dark-gray);
+            font-weight: 500;
         }
 
         @media (min-width: 640px) {
+            .parameters {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .controls {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -227,94 +326,55 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 1rem;
+                padding: 0 1rem;
             }
 
             .main-content {
-                padding: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: var(--font-size-2xl);
+            }
+            
+            .hero-description {
+                font-size: var(--font-size-lg);
+            }
+            
+            .upload-section {
+                padding: 2rem;
             }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased">
-    <!-- Header/Navigation -->
-    <header class="bg-white sticky top-0 z-40 shadow-sm">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <svg class="h-8 w-8 text-primary-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" fill="currentColor"/>
-                        <path d="M19.0711 19.0711C22.9763 15.1658 22.9763 8.83418 19.0711 4.92893C15.1658 1.02369 8.83418 1.02369 4.92893 4.92893C1.02369 8.83418 1.02369 15.1658 4.92893 19.0711C8.83418 22.9763 15.1658 22.9763 19.0711 19.0711ZM16.2426 7.75736C18.5858 10.1005 18.5858 13.8995 16.2426 16.2426C13.8995 18.5858 10.1005 18.5858 7.75736 16.2426C5.41421 13.8995 5.41421 10.1005 7.75736 7.75736C10.1005 5.41421 13.8995 5.41421 16.2426 7.75736Z" fill="currentColor"/>
-                    </svg>
-                    <span class="ml-2 text-xl font-semibold">AudioClipper</span>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#features" class="text-gray-600 hover:text-primary-600 transition-colors duration-200">Features</a>
-                    <a href="#how-it-works" class="text-gray-600 hover:text-primary-600 transition-colors duration-200">How it Works</a>
-                    <a href="#pricing" class="text-gray-600 hover:text-primary-600 transition-colors duration-200">Pricing</a>
-                    <a href="#faq" class="text-gray-600 hover:text-primary-600 transition-colors duration-200">FAQ</a>
-                </nav>
-                
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <!-- CTA Button -->
-                <div class="hidden md:block">
-                    <a href="#tool" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
-                        Try it now
-                    </a>
-                </div>
-            </div>
+<body>
+    <header>
+        <div class="container">
+            <h1>AudioBreath <span class="free-badge">100% FREE</span></h1>
+            <p class="description">Professional tool for podcast creators and audiobook producers. No registration required.</p>
         </div>
     </header>
-    
-    <!-- Mobile Navigation Menu (hidden by default) -->
-    <div class="hidden md:hidden bg-white fixed inset-0 z-50 overflow-y-auto">
-        <div class="p-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <svg class="h-8 w-8 text-primary-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" fill="currentColor"/>
-                        <path d="M19.0711 19.0711C22.9763 15.1658 22.9763 8.83418 19.0711 4.92893C15.1658 1.02369 8.83418 1.02369 4.92893 4.92893C1.02369 8.83418 1.02369 15.1658 4.92893 19.0711C8.83418 22.9763 15.1658 22.9763 19.0711 19.0711ZM16.2426 7.75736C18.5858 10.1005 18.5858 13.8995 16.2426 16.2426C13.8995 18.5858 10.1005 18.5858 7.75736 16.2426C5.41421 13.8995 5.41421 10.1005 7.75736 7.75736C10.1005 5.41421 13.8995 5.41421 16.2426 7.75736Z" fill="currentColor"/>
-                    </svg>
-                    <span class="ml-2 text-xl font-semibold">AudioClipper</span>
-                </div>
-                <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <nav class="mt-8 space-y-6">
-                <a href="#features" class="block text-lg font-medium text-gray-600 hover:text-primary-600 transition-colors duration-200">Features</a>
-                <a href="#how-it-works" class="block text-lg font-medium text-gray-600 hover:text-primary-600 transition-colors duration-200">How it Works</a>
-                <a href="#pricing" class="block text-lg font-medium text-gray-600 hover:text-primary-600 transition-colors duration-200">Pricing</a>
-                <a href="#faq" class="block text-lg font-medium text-gray-600 hover:text-primary-600 transition-colors duration-200">FAQ</a>
-                <a href="#tool" class="block w-full text-center px-4 py-2 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
-                    Try it now
-                </a>
-            </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <h2 class="hero-title">Remove Breaths From Your Audio</h2>
+            <p class="hero-description">Automatically detect and remove breathing sounds and pauses with our AI-powered technology.</p>
         </div>
-    </div>
+    </section>
 
     <main class="container">
         <div class="main-content">
+            <div class="free-notice">
+                <p>✓ Completely free to use. No registration, no limitations.</p>
+            </div>
+            
             <div class="upload-section" id="dropZone">
                 <input type="file" id="audioInput" accept=".mp3,.wav" style="display: none;">
                 <button class="button" onclick="document.getElementById('audioInput').click()">
-                    选择音频文件
+                    Select Audio File
                 </button>
-                <p style="margin-top: 1rem; color: var(--gray-700);">
-                    支持 MP3、WAV 格式，拖放文件到此处也可以上传
+                <p style="margin-top: 1.5rem; color: var(--medium-gray);">
+                    Supports MP3 and WAV formats. Drag and drop files here to upload.
                 </p>
             </div>
 
@@ -322,837 +382,51 @@
 
             <div class="parameters">
                 <div class="parameter-group">
-                    <label for="threshold">检测灵敏度</label>
+                    <label for="threshold">Detection Sensitivity</label>
                     <input type="range" id="threshold" min="0" max="100" value="50">
                     <span id="thresholdValue">50%</span>
                 </div>
                 <div class="parameter-group">
-                    <label for="minDuration">最小持续时间 (ms)</label>
+                    <label for="minDuration">Minimum Duration (ms)</label>
                     <input type="range" id="minDuration" min="100" max="1000" value="300" step="50">
                     <span id="durationValue">300ms</span>
                 </div>
             </div>
 
             <div class="controls">
-                <button id="analyzeBtn" class="button" disabled>分析气口</button>
-                <button id="removeBtn" class="button" disabled>移除气口</button>
-                <button id="playBtn" class="button" disabled>播放</button>
-                <button id="downloadBtn" class="button" disabled>下载处理后的音频</button>
+                <button id="analyzeBtn" class="button" disabled>Analyze Breaths</button>
+                <button id="removeBtn" class="button" disabled>Remove Breaths</button>
+                <button id="playBtn" class="button" disabled>Play</button>
+                <button id="downloadBtn" class="button" disabled>Download Processed Audio</button>
             </div>
 
             <div class="progress">
                 <div class="progress-bar"></div>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <h3 class="feature-title">Fast Processing</h3>
+                    <p class="feature-description">Process your audio files quickly and efficiently in your browser.</p>
+                </div>
+                <div class="feature">
+                    <h3 class="feature-title">Privacy First</h3>
+                    <p class="feature-description">All processing happens locally. Your files never leave your computer.</p>
+                </div>
+                <div class="feature">
+                    <h3 class="feature-title">Professional Results</h3>
+                    <p class="feature-description">Achieve studio-quality audio with our advanced breath detection algorithm.</p>
+                </div>
             </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <p>© 2024 AudioClipper | Contact us: support@example.com</p>
+            <p>© 2024 AudioBreath | Completely free and no registration required | Contact: support@example.com</p>
         </div>
     </footer>
 
-    <script type="module" src="/src/main.js"></script>
-
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-white">
-        <!-- Background gradient -->
-        <div class="absolute inset-0 bg-gradient-to-br from-primary-50 to-white"></div>
-        
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 sm:pt-24 sm:pb-32">
-            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
-                <div class="lg:col-span-6">
-                    <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-                        <span class="block text-gray-900">Professional Audio,</span>
-                        <span class="block text-primary-600">Without the Breaths</span>
-                    </h1>
-                    <p class="mt-6 text-xl text-gray-500 max-w-3xl">
-                        Streamline your podcast and audiobook production with our AI-powered breath and pause removal tool. Create professional-grade audio in seconds.
-                    </p>
-                    <div class="mt-8 sm:flex">
-                        <div class="rounded-md shadow">
-                            <a href="#tool" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10 transition-colors duration-200">
-                                Try it now
-                            </a>
-                        </div>
-                        <div class="mt-3 sm:mt-0 sm:ml-3">
-                            <a href="#how-it-works" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 md:py-4 md:text-lg md:px-10 transition-colors duration-200">
-                                Learn how it works
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
-                    <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
-                        <div class="relative block w-full bg-white rounded-lg overflow-hidden">
-                            <img class="w-full" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Podcast recording studio">
-                            <div class="absolute inset-0 w-full h-full flex items-center justify-center">
-                                <svg class="h-20 w-20 text-primary-500" fill="currentColor" viewBox="0 0 84 84">
-                                    <circle opacity="0.9" cx="42" cy="42" r="42" fill="white"/>
-                                    <path d="M55 41.5L36 53.5V29.5L55 41.5Z"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-16 bg-white sm:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold text-primary-600 tracking-wide uppercase">Features</h2>
-                <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">Everything you need for perfect audio</p>
-                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Advanced audio processing technology made simple for everyone, from beginners to professionals.</p>
-            </div>
-
-            <div class="mt-16">
-                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                    <!-- Feature 1 -->
-                    <div class="pt-6">
-                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                            <div class="-mt-6">
-                                <div>
-                                    <span class="inline-flex items-center justify-center p-3 bg-primary-500 rounded-md shadow-lg">
-                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Intelligent Breath Detection</h3>
-                                <p class="mt-5 text-base text-gray-500">
-                                    Our advanced algorithm automatically identifies breaths and pauses in your audio with adjustable sensitivity.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Feature 2 -->
-                    <div class="pt-6">
-                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                            <div class="-mt-6">
-                                <div>
-                                    <span class="inline-flex items-center justify-center p-3 bg-primary-500 rounded-md shadow-lg">
-                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">One-click Breath Removal</h3>
-                                <p class="mt-5 text-base text-gray-500">
-                                    Remove all detected breaths with a single click, creating seamless audio that sounds professionally edited.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Feature 3 -->
-                    <div class="pt-6">
-                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                            <div class="-mt-6">
-                                <div>
-                                    <span class="inline-flex items-center justify-center p-3 bg-primary-500 rounded-md shadow-lg">
-                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Visual Waveform Editor</h3>
-                                <p class="mt-5 text-base text-gray-500">
-                                    See exactly where breaths are detected in your audio with our intuitive visual waveform interface.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Feature 4 -->
-                    <div class="pt-6">
-                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                            <div class="-mt-6">
-                                <div>
-                                    <span class="inline-flex items-center justify-center p-3 bg-primary-500 rounded-md shadow-lg">
-                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Works in Your Browser</h3>
-                                <p class="mt-5 text-base text-gray-500">
-                                    No downloads required. Process your audio directly in your web browser on any device.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Feature 5 -->
-                    <div class="pt-6">
-                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                            <div class="-mt-6">
-                                <div>
-                                    <span class="inline-flex items-center justify-center p-3 bg-primary-500 rounded-md shadow-lg">
-                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Privacy First</h3>
-                                <p class="mt-5 text-base text-gray-500">
-                                    Your audio stays on your device. We never store or send your files to our servers.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Feature 6 -->
-                    <div class="pt-6">
-                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                            <div class="-mt-6">
-                                <div>
-                                    <span class="inline-flex items-center justify-center p-3 bg-primary-500 rounded-md shadow-lg">
-                                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">High-Quality Export</h3>
-                                <p class="mt-5 text-base text-gray-500">
-                                    Download your processed audio in high-quality WAV format, ready for publishing.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How it Works Section -->
-    <section id="how-it-works" class="relative bg-gray-50 py-16 sm:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold text-primary-600 tracking-wide uppercase">How it Works</h2>
-                <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">Simple 3-step process</p>
-                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Our tool makes breath removal so simple anyone can do it, regardless of technical experience.</p>
-            </div>
-
-            <div class="mt-16">
-                <div class="relative">
-                    <!-- Steps connection line -->
-                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                        <div class="w-full border-t border-gray-300"></div>
-                    </div>
-                    
-                    <!-- Steps -->
-                    <div class="relative flex justify-between">
-                        <!-- Step 1 -->
-                        <div class="text-center">
-                            <span class="relative flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-white border-2 border-primary-500">
-                                <span class="text-primary-600 font-bold">1</span>
-                            </span>
-                            <div class="mt-4 max-w-xs">
-                                <h3 class="text-lg font-medium text-gray-900">Upload</h3>
-                                <p class="mt-2 text-sm text-gray-500">Upload your audio file (MP3 or WAV) by clicking or dragging and dropping.</p>
-                            </div>
-                        </div>
-
-                        <!-- Step 2 -->
-                        <div class="text-center">
-                            <span class="relative flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-white border-2 border-primary-500">
-                                <span class="text-primary-600 font-bold">2</span>
-                            </span>
-                            <div class="mt-4 max-w-xs">
-                                <h3 class="text-lg font-medium text-gray-900">Analyze</h3>
-                                <p class="mt-2 text-sm text-gray-500">Adjust the sensitivity, then click "Analyze Breaths" to detect breathing patterns.</p>
-                            </div>
-                        </div>
-
-                        <!-- Step 3 -->
-                        <div class="text-center">
-                            <span class="relative flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-white border-2 border-primary-500">
-                                <span class="text-primary-600 font-bold">3</span>
-                            </span>
-                            <div class="mt-4 max-w-xs">
-                                <h3 class="text-lg font-medium text-gray-900">Remove & Download</h3>
-                                <p class="mt-2 text-sm text-gray-500">Click "Remove Breaths" and download your clean, professional audio.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-16 text-center">
-                <a href="#tool" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
-                    Try it yourself
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Tool Section -->
-    <section id="tool" class="py-16 bg-white sm:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold text-primary-600 tracking-wide uppercase">Audio Tool</h2>
-                <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">Remove Breaths Now</p>
-                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Upload your audio and our tool will automatically detect and remove breath sounds.</p>
-            </div>
-
-            <div class="mt-12 bg-white rounded-lg shadow-xl overflow-hidden">
-                <div class="px-6 py-8 sm:p-10">
-                    <!-- Upload Area -->
-                    <div class="upload-section border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-gray-50 transition-all duration-300 hover:border-primary-300 hover:bg-gray-100" id="dropZone">
-                        <input type="file" id="audioInput" accept=".mp3,.wav" class="hidden">
-                        <button onclick="document.getElementById('audioInput').click()" class="px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none transition-colors duration-200">
-                            Select Audio File
-                        </button>
-                        <p class="mt-4 text-sm text-gray-500">
-                            Supports MP3, WAV formats. Drop files here or click to upload.
-                        </p>
-                    </div>
-
-                    <!-- Waveform Display -->
-                    <div id="waveform" class="mt-8 bg-gray-50 rounded-lg p-6 h-32"></div>
-
-                    <!-- Parameters -->
-                    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                        <div class="flex flex-col">
-                            <label for="threshold" class="mb-2 text-sm font-medium text-gray-700">Detection Sensitivity</label>
-                            <div class="flex items-center">
-                                <input type="range" id="threshold" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                                <span id="thresholdValue" class="ml-3 text-sm text-gray-500 w-12">50%</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="minDuration" class="mb-2 text-sm font-medium text-gray-700">Minimum Duration (ms)</label>
-                            <div class="flex items-center">
-                                <input type="range" id="minDuration" min="100" max="1000" value="300" step="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                                <span id="durationValue" class="ml-3 text-sm text-gray-500 w-16">300ms</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Controls -->
-                    <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                        <button id="analyzeBtn" disabled class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200">
-                            Analyze Breaths
-                        </button>
-                        <button id="removeBtn" disabled class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200">
-                            Remove Breaths
-                        </button>
-                        <button id="playBtn" disabled class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200">
-                            Play
-                        </button>
-                        <button id="downloadBtn" disabled class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200">
-                            Download
-                        </button>
-                    </div>
-
-                    <!-- Progress Bar -->
-                    <div class="progress mt-6 h-1 bg-gray-200 rounded-full overflow-hidden hidden">
-                        <div class="progress-bar h-full bg-primary-600 w-0"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="bg-gray-50 py-16 sm:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold text-primary-600 tracking-wide uppercase">Testimonials</h2>
-                <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">Loved by content creators</p>
-                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">See what professionals and beginners alike are saying about AudioClipper.</p>
-            </div>
-
-            <div class="mt-16 grid gap-8 lg:grid-cols-3">
-                <!-- Testimonial 1 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="px-6 py-8">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Sarah Johnson">
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">Sarah Johnson</h3>
-                                <div class="flex items-center">
-                                    <p class="text-sm text-gray-500">Podcast Host</p>
-                                    <div class="ml-2 flex">
-                                        <!-- 5 stars -->
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-gray-600 italic">"AudioClipper has cut my podcast editing time in half. The breath detection is incredibly accurate, and the removal process is seamless. My audio sounds professionally edited without any effort."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 2 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="px-6 py-8">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Michael Chen">
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">Michael Chen</h3>
-                                <div class="flex items-center">
-                                    <p class="text-sm text-gray-500">Audiobook Narrator</p>
-                                    <div class="ml-2 flex">
-                                        <!-- 5 stars -->
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-gray-600 italic">"I've been narrating audiobooks for years, and this tool is amazing. My producers are impressed with the clean audio I can now deliver. The adjustable sensitivity lets me fine-tune exactly how much breath removal I want."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="px-6 py-8">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="David Garcia">
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900">David Garcia</h3>
-                                <div class="flex items-center">
-                                    <p class="text-sm text-gray-500">YouTube Creator</p>
-                                    <div class="ml-2 flex">
-                                        <!-- 4.5 stars -->
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                        <svg class="h-4 w-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-gray-600 italic">"As a YouTube creator, I need tools that are fast and effective. AudioClipper is both. I've drastically improved my audio quality without needing expensive studio equipment or audio engineering skills."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="bg-white py-16 sm:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold text-primary-600 tracking-wide uppercase">Pricing</h2>
-                <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">Simple, transparent pricing</p>
-                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Choose the plan that's right for your needs.</p>
-            </div>
-
-            <div class="mt-16 grid gap-8 lg:grid-cols-3">
-                <!-- Free Plan -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
-                    <div class="px-6 py-8">
-                        <h3 class="text-2xl font-medium text-gray-900">Free</h3>
-                        <p class="mt-4 text-gray-500">Perfect for occasional use and testing.</p>
-                        <p class="mt-8">
-                            <span class="text-4xl font-extrabold text-gray-900">$0</span>
-                            <span class="text-base font-medium text-gray-500">/month</span>
-                        </p>
-                        <ul class="mt-8 space-y-4">
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Process up to 10 minutes of audio</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Basic breath detection</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Standard quality export</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">No batch processing</p>
-                            </li>
-                        </ul>
-                        <div class="mt-8">
-                            <a href="#tool" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
-                                Get started
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pro Plan -->
-                <div class="bg-white rounded-lg shadow-xl overflow-hidden border-2 border-primary-500 transform scale-105 z-10">
-                    <div class="px-6 py-8">
-                        <div class="inline-flex px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase bg-primary-100 text-primary-600">
-                            Most Popular
-                        </div>
-                        <h3 class="mt-4 text-2xl font-medium text-gray-900">Pro</h3>
-                        <p class="mt-4 text-gray-500">Ideal for podcasters and content creators.</p>
-                        <p class="mt-8">
-                            <span class="text-4xl font-extrabold text-gray-900">$9.99</span>
-                            <span class="text-base font-medium text-gray-500">/month</span>
-                        </p>
-                        <ul class="mt-8 space-y-4">
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Unlimited audio processing</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Advanced breath detection</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">High quality exports</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Batch processing (up to 10 files)</p>
-                            </li>
-                        </ul>
-                        <div class="mt-8">
-                            <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
-                                Start free trial
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Enterprise Plan -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
-                    <div class="px-6 py-8">
-                        <h3 class="text-2xl font-medium text-gray-900">Enterprise</h3>
-                        <p class="mt-4 text-gray-500">For professional studios and businesses.</p>
-                        <p class="mt-8">
-                            <span class="text-4xl font-extrabold text-gray-900">$29.99</span>
-                            <span class="text-base font-medium text-gray-500">/month</span>
-                        </p>
-                        <ul class="mt-8 space-y-4">
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Everything in Pro</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Unlimited batch processing</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">API access</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <p class="ml-3 text-base text-gray-700">Priority support</p>
-                            </li>
-                        </ul>
-                        <div class="mt-8">
-                            <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
-                                Contact sales
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="bg-white py-16 sm:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold text-primary-600 tracking-wide uppercase">FAQ</h2>
-                <p class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">Frequently Asked Questions</p>
-                <p class="max-w-xl mt-5 mx-auto text-xl text-gray-500">Everything you need to know about our breath removal tool.</p>
-            </div>
-
-            <div class="mt-12">
-                <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-12">
-                    <!-- Question 1 -->
-                    <div>
-                        <dt class="text-lg leading-6 font-medium text-gray-900">
-                            How does the breath detection work?
-                        </dt>
-                        <dd class="mt-2 text-base text-gray-500">
-                            Our algorithm analyzes audio waveforms to identify periods of low amplitude that match typical breath patterns. It uses RMS (Root Mean Square) energy calculation to detect these patterns accurately.
-                        </dd>
-                    </div>
-
-                    <!-- Question 2 -->
-                    <div>
-                        <dt class="text-lg leading-6 font-medium text-gray-900">
-                            What audio formats are supported?
-                        </dt>
-                        <dd class="mt-2 text-base text-gray-500">
-                            Currently, we support MP3 and WAV formats. We're working on adding more formats in the future.
-                        </dd>
-                    </div>
-
-                    <!-- Question 3 -->
-                    <div>
-                        <dt class="text-lg leading-6 font-medium text-gray-900">
-                            Is my audio secure when I use this tool?
-                        </dt>
-                        <dd class="mt-2 text-base text-gray-500">
-                            Yes, all processing is done in your browser. Your audio files are never uploaded to our servers, ensuring complete privacy and security.
-                        </dd>
-                    </div>
-
-                    <!-- Question 4 -->
-                    <div>
-                        <dt class="text-lg leading-6 font-medium text-gray-900">
-                            What should I adjust if the detection isn't working well?
-                        </dt>
-                        <dd class="mt-2 text-base text-gray-500">
-                            Try adjusting the sensitivity slider. Higher values make the detection more sensitive (detecting more breaths), while lower values make it less sensitive. You can also adjust the minimum duration to filter out shorter sounds.
-                        </dd>
-                    </div>
-
-                    <!-- Question 5 -->
-                    <div>
-                        <dt class="text-lg leading-6 font-medium text-gray-900">
-                            Will this remove all background noise?
-                        </dt>
-                        <dd class="mt-2 text-base text-gray-500">
-                            No, this tool is specifically designed to target breath sounds. For general noise reduction, we recommend using a dedicated noise reduction tool first, then using AudioClipper for breath removal.
-                        </dd>
-                    </div>
-
-                    <!-- Question 6 -->
-                    <div>
-                        <dt class="text-lg leading-6 font-medium text-gray-900">
-                            Is there a limit to the audio file size I can process?
-                        </dt>
-                        <dd class="mt-2 text-base text-gray-500">
-                            In the free version, you can process files up to 100MB in size and up to 10 minutes in length. Paid plans have higher or no limits.
-                        </dd>
-                    </div>
-                </dl>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-                <div class="space-y-8 xl:col-span-1">
-                    <div class="flex items-center">
-                        <svg class="h-8 w-8 text-primary-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" fill="currentColor"/>
-                            <path d="M19.0711 19.0711C22.9763 15.1658 22.9763 8.83418 19.0711 4.92893C15.1658 1.02369 8.83418 1.02369 4.92893 4.92893C1.02369 8.83418 1.02369 15.1658 4.92893 19.0711C8.83418 22.9763 15.1658 22.9763 19.0711 19.0711ZM16.2426 7.75736C18.5858 10.1005 18.5858 13.8995 16.2426 16.2426C13.8995 18.5858 10.1005 18.5858 7.75736 16.2426C5.41421 13.8995 5.41421 10.1005 7.75736 7.75736C10.1005 5.41421 13.8995 5.41421 16.2426 7.75736Z" fill="currentColor"/>
-                        </svg>
-                        <span class="ml-2 text-xl font-bold">AudioClipper</span>
-                    </div>
-                    <p class="text-gray-400 text-base">
-                        Professional audio breath removal tool for podcasters, narrators, and content creators.
-                    </p>
-                    <div class="flex space-x-6">
-                        <!-- Social icons -->
-                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors duration-200">
-                            <span class="sr-only">Facebook</span>
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors duration-200">
-                            <span class="sr-only">Twitter</span>
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                            </svg>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors duration-200">
-                            <span class="sr-only">Instagram</span>
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
-                    <div class="md:grid md:grid-cols-2 md:gap-8">
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Product</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li>
-                                    <a href="#features" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Features</a>
-                                </li>
-                                <li>
-                                    <a href="#how-it-works" class="text-base text-gray-400 hover:text-white transition-colors duration-200">How it Works</a>
-                                </li>
-                                <li>
-                                    <a href="#pricing" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Pricing</a>
-                                </li>
-                                <li>
-                                    <a href="#faq" class="text-base text-gray-400 hover:text-white transition-colors duration-200">FAQ</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Support</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Documentation</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Guides</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">API Status</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Contact Us</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="md:grid md:grid-cols-2 md:gap-8">
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Company</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">About</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Press</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Partners</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Legal</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Privacy</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Terms</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Cookie Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-base text-gray-400 hover:text-white transition-colors duration-200">Licenses</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-800 pt-8">
-                <p class="text-base text-gray-400 xl:text-center">
-                    &copy; 2023 AudioClipper. All rights reserved. Created by Harris Liu. Contact: harrisliu55@gmail.com
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Toast Message Container - Will be dynamically populated -->
-    <div id="toast-container"></div>
-    
     <script type="module" src="/src/main.js"></script>
 </body>
 </html>

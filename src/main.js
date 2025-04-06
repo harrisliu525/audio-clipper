@@ -6,46 +6,46 @@ let audioContext = null;
 let audioBuffer = null;
 let breathMarkers = [];
 
-// 初始化 WaveSurfer
+// Initialize WaveSurfer
 function initWaveSurfer() {
     wavesurfer = WaveSurfer.create({
         container: '#waveform',
-        waveColor: '#3b82f6',
-        progressColor: '#2563eb',
-        cursorColor: '#374151',
+        waveColor: '#0071e3',
+        progressColor: '#147ce5',
+        cursorColor: '#1d1d1f',
         height: 128,
         normalize: true,
         splitChannels: false,
         minPxPerSec: 50
     });
 
-    // 在WaveSurfer v7.7.3中，插件需要单独创建并存储
-    // 创建区域插件
+    // In WaveSurfer v7.7.3, plugins need to be created separately and stored
+    // Create regions plugin
     const regionsPlugin = RegionsPlugin.create();
-    // 注册插件
+    // Register plugin
     wavesurfer.registerPlugin(regionsPlugin);
-    // 存储插件引用以便后续使用
+    // Store plugin reference for later use
     wavesurfer.regionsPlugin = regionsPlugin;
 
     wavesurfer.on('ready', () => {
         document.getElementById('analyzeBtn').disabled = false;
         document.getElementById('playBtn').disabled = false;
-        showToast('音频加载完成');
+        showToast('Audio loaded successfully');
     });
 
     wavesurfer.on('error', (error) => {
-        showToast('音频加载失败: ' + error, 'error');
+        showToast('Failed to load audio: ' + error, 'error');
     });
 }
 
-// 初始化页面
+// Initialize page
 function init() {
     initWaveSurfer();
     setupEventListeners();
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
 }
 
-// 设置事件监听器
+// Set up event listeners
 function setupEventListeners() {
     const audioInput = document.getElementById('audioInput');
     const dropZone = document.getElementById('dropZone');
@@ -67,10 +67,10 @@ function setupEventListeners() {
     thresholdInput.addEventListener('input', updateThresholdValue);
     minDurationInput.addEventListener('input', updateDurationValue);
 
-    // 添加拖放视觉反馈
+    // Add drag and drop visual feedback
     dropZone.addEventListener('dragenter', () => {
-        dropZone.style.borderColor = '#3b82f6';
-        dropZone.style.backgroundColor = '#f8fafc';
+        dropZone.style.borderColor = '#0071e3';
+        dropZone.style.backgroundColor = 'rgba(0, 113, 227, 0.05)';
     });
 
     dropZone.addEventListener('dragleave', () => {
@@ -79,7 +79,7 @@ function setupEventListeners() {
     });
 }
 
-// 显示提示信息
+// Display toast notifications
 function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
@@ -97,7 +97,7 @@ function showToast(message, type = 'info') {
     }, 100);
 }
 
-// 更新进度条
+// Update progress bar
 function updateProgress(progress) {
     const progressBar = document.querySelector('.progress-bar');
     const progressContainer = document.querySelector('.progress');
@@ -110,19 +110,19 @@ function updateProgress(progress) {
     }
 }
 
-// 文件选择处理
+// Handle file selection
 function handleFileSelect(event) {
     const file = event.target.files[0];
     if (file) {
         if (file.size > 100 * 1024 * 1024) {
-            showToast('文件大小不能超过100MB', 'error');
+            showToast('File size cannot exceed 100MB', 'error');
             return;
         }
         loadAudioFile(file);
     }
 }
 
-// 拖放处理
+// Handle drag and drop
 function handleDragOver(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -135,20 +135,20 @@ function handleDrop(event) {
     const file = event.dataTransfer.files[0];
     if (file && (file.type === 'audio/mp3' || file.type === 'audio/wav')) {
         if (file.size > 100 * 1024 * 1024) {
-            showToast('文件大小不能超过100MB', 'error');
+            showToast('File size cannot exceed 100MB', 'error');
             return;
         }
         loadAudioFile(file);
     } else {
-        showToast('请上传MP3或WAV格式的音频文件', 'error');
+        showToast('Please upload an MP3 or WAV audio file', 'error');
     }
 
-    // 重置拖放区域样式
+    // Reset drop zone style
     event.target.style.borderColor = '';
     event.target.style.backgroundColor = '';
 }
 
-// 加载音频文件
+// Load audio file
 async function loadAudioFile(file) {
     try {
         updateProgress(10);
@@ -160,19 +160,19 @@ async function loadAudioFile(file) {
         updateProgress(100);
         
         setTimeout(() => updateProgress(0), 1000);
-        showToast('音频加载成功');
+        showToast('Audio loaded successfully');
     } catch (error) {
         console.error('Error loading audio file:', error);
-        showToast('音频加载失败，请检查文件格式', 'error');
+        showToast('Failed to load audio. Please check the file format', 'error');
         updateProgress(0);
     }
 }
 
-// 分析气口
+// Analyze breaths
 async function analyzeBreaths() {
     if (!audioBuffer) return;
 
-    // 修改阈值计算，阈值应该基于整体音频的平均能量
+    // Modify threshold calculation based on overall audio average energy
     const sensitivityPercent = document.getElementById('threshold').value; // 0-100
     const minDuration = document.getElementById('minDuration').value;
     
@@ -180,9 +180,9 @@ async function analyzeBreaths() {
     const data = audioBuffer.getChannelData(0);
     const sampleRate = audioBuffer.sampleRate;
     
-    // 计算整个音频的平均RMS能量
+    // Calculate average RMS energy for the entire audio
     let totalRms = 0;
-    let rmsWindow = Math.floor(sampleRate * 0.02); // 20ms窗口
+    let rmsWindow = Math.floor(sampleRate * 0.02); // 20ms window
     let windowCount = 0;
     
     for (let i = 0; i < data.length; i += rmsWindow) {
@@ -199,18 +199,18 @@ async function analyzeBreaths() {
     }
     
     const avgRms = totalRms / windowCount;
-    // 基于平均RMS和灵敏度百分比计算阈值
-    // 灵敏度越高，阈值相对于平均RMS越低，更容易检测到气口
+    // Calculate threshold based on average RMS and sensitivity percentage
+    // Higher sensitivity means lower threshold relative to average RMS, making it easier to detect breaths
     const threshold = avgRms * (1 - sensitivityPercent / 100);
     
-    console.log(`平均RMS: ${avgRms}, 阈值: ${threshold}, 灵敏度: ${sensitivityPercent}%`);
+    console.log(`Average RMS: ${avgRms}, Threshold: ${threshold}, Sensitivity: ${sensitivityPercent}%`);
     
     breathMarkers = [];
     let isBreath = false;
     let breathStart = 0;
     
     for (let i = 0; i < data.length; i += rmsWindow) {
-        // 计算RMS能量
+        // Calculate RMS energy
         let sum = 0;
         for (let j = 0; j < rmsWindow && (i + j) < data.length; j++) {
             sum += data[i + j] * data[i + j];
@@ -240,7 +240,7 @@ async function analyzeBreaths() {
         }
     }
 
-    // 检查是否在音频结尾处有一个气口
+    // Check if there's a breath at the end of the audio
     if (isBreath) {
         const breathDuration = (data.length - breathStart) / sampleRate * 1000;
         if (breathDuration >= minDuration) {
@@ -251,26 +251,26 @@ async function analyzeBreaths() {
         }
     }
 
-    // 合并相近的气口标记
-    breathMarkers = mergeCloseBreaths(breathMarkers, 0.1); // 100ms阈值
+    // Merge close breath markers
+    breathMarkers = mergeCloseBreaths(breathMarkers, 0.1); // 100ms threshold
 
-    // 清除已有的区域标记
+    // Clear existing region markers
     if (wavesurfer.regionsPlugin) {
-        // 获取所有区域
+        // Get all regions
         const regions = wavesurfer.regionsPlugin.getRegions();
-        // 移除每个区域
+        // Remove each region
         regions.forEach(region => {
             region.remove();
         });
     }
 
-    // 标记气口位置
+    // Mark breath positions
     breathMarkers.forEach(marker => {
-        // 使用RegionsPlugin的addRegion方法
+        // Use RegionsPlugin's addRegion method
         wavesurfer.regionsPlugin.addRegion({
             start: marker.start,
             end: marker.end,
-            color: 'rgba(239, 68, 68, 0.3)',
+            color: 'rgba(255, 69, 58, 0.3)',
             drag: false,
             resize: false
         });
@@ -280,10 +280,10 @@ async function analyzeBreaths() {
     setTimeout(() => updateProgress(0), 1000);
     
     document.getElementById('removeBtn').disabled = false;
-    showToast(`检测到 ${breathMarkers.length} 个气口`);
+    showToast(`Detected ${breathMarkers.length} breaths`);
 }
 
-// 合并相近的气口标记
+// Merge close breath markers
 function mergeCloseBreaths(markers, threshold) {
     if (markers.length < 2) return markers;
     
@@ -292,7 +292,7 @@ function mergeCloseBreaths(markers, threshold) {
     
     for (let i = 1; i < markers.length; i++) {
         if (markers[i].start - current.end < threshold) {
-            // 合并相邻的气口
+            // Merge adjacent breaths
             current.end = markers[i].end;
         } else {
             merged.push(current);
@@ -304,7 +304,7 @@ function mergeCloseBreaths(markers, threshold) {
     return merged;
 }
 
-// 移除气口
+// Remove breaths
 async function removeBreaths() {
     if (!audioBuffer || breathMarkers.length === 0) return;
 
@@ -327,7 +327,7 @@ async function removeBreaths() {
                 const startSample = Math.floor(marker.start * audioBuffer.sampleRate);
                 const endSample = Math.floor(marker.end * audioBuffer.sampleRate);
 
-                // 复制气口之前的数据
+                // Copy data before the breath
                 for (let i = lastEnd; i < startSample; i++) {
                     outputData[outputIndex++] = inputData[i];
                 }
@@ -336,7 +336,7 @@ async function removeBreaths() {
                 updateProgress(10 + (index / breathMarkers.length) * 80);
             });
 
-            // 复制最后一个气口之后的数据
+            // Copy data after the last breath
             for (let i = lastEnd; i < inputData.length; i++) {
                 outputData[outputIndex++] = inputData[i];
             }
@@ -349,15 +349,15 @@ async function removeBreaths() {
         document.getElementById('downloadBtn').disabled = false;
         updateProgress(100);
         setTimeout(() => updateProgress(0), 1000);
-        showToast('气口移除完成');
+        showToast('Breaths removed successfully');
     } catch (error) {
         console.error('Error removing breaths:', error);
-        showToast('处理过程中出现错误', 'error');
+        showToast('An error occurred during processing', 'error');
         updateProgress(0);
     }
 }
 
-// 播放控制
+// Playback control
 function togglePlay() {
     if (wavesurfer.isPlaying()) {
         wavesurfer.pause();
@@ -366,7 +366,7 @@ function togglePlay() {
     }
 }
 
-// 下载处理后的音频
+// Download processed audio
 async function downloadProcessedAudio() {
     if (!audioBuffer) return;
 
@@ -382,15 +382,15 @@ async function downloadProcessedAudio() {
         URL.revokeObjectURL(url);
         updateProgress(100);
         setTimeout(() => updateProgress(0), 1000);
-        showToast('下载已开始');
+        showToast('Download started');
     } catch (error) {
         console.error('Error downloading audio:', error);
-        showToast('下载失败', 'error');
+        showToast('Download failed', 'error');
         updateProgress(0);
     }
 }
 
-// AudioBuffer 转换为 WAV
+// Convert AudioBuffer to WAV
 function bufferToWave(audioBuffer) {
     const numberOfChannels = audioBuffer.numberOfChannels;
     const length = audioBuffer.length * numberOfChannels * 2;
@@ -399,12 +399,12 @@ function bufferToWave(audioBuffer) {
     const channels = [];
     let pos = 0;
 
-    // 获取声道数据
+    // Get channel data
     for (let i = 0; i < numberOfChannels; i++) {
         channels.push(audioBuffer.getChannelData(i));
     }
 
-    // 写入WAV文件头
+    // Write WAV header
     writeString(view, 0, 'RIFF');
     view.setUint32(4, 36 + length, true);
     writeString(view, 8, 'WAVE');
@@ -419,7 +419,7 @@ function bufferToWave(audioBuffer) {
     writeString(view, 36, 'data');
     view.setUint32(40, length, true);
 
-    // 写入采样数据
+    // Write sample data
     for (let i = 0; i < audioBuffer.length; i++) {
         for (let channel = 0; channel < numberOfChannels; channel++) {
             const sample = Math.max(-1, Math.min(1, channels[channel][i]));
@@ -431,14 +431,14 @@ function bufferToWave(audioBuffer) {
     return new Blob([buffer], { type: 'audio/wav' });
 }
 
-// 辅助函数：写入字符串到DataView
+// Helper function: Write string to DataView
 function writeString(view, offset, string) {
     for (let i = 0; i < string.length; i++) {
         view.setUint8(offset + i, string.charCodeAt(i));
     }
 }
 
-// 更新参数显示值
+// Update parameter display values
 function updateThresholdValue(event) {
     document.getElementById('thresholdValue').textContent = event.target.value + '%';
 }
@@ -447,5 +447,5 @@ function updateDurationValue(event) {
     document.getElementById('durationValue').textContent = event.target.value + 'ms';
 }
 
-// 初始化应用
-init();
+// Initialize application
+document.addEventListener('DOMContentLoaded', init);
