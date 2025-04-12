@@ -7,4 +7,17 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  worker: {
+    format: 'es',
+  },
+  build: {
+    target: 'esnext',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          wavesurfer: ['wavesurfer.js'],
+        }
+      }
+    }
+  }
 });
