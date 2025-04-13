@@ -48,7 +48,7 @@ function init() {
 // Set up event listeners
 function setupEventListeners() {
     const audioInput = document.getElementById('audioInput');
-    const dropZone = document.getElementById('dropZone');
+    const dropZone = document.querySelector('[data-dropzone]');
     const analyzeBtn = document.getElementById('analyzeBtn');
     const removeBtn = document.getElementById('removeBtn');
     const playBtn = document.getElementById('playBtn');

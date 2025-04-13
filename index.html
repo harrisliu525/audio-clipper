@@ -12,7 +12,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AudioBreath | Professional Breath Removal Tool</title>
+    <title>BreathCut | Professional Breath Removal Tool</title>
     <style>
         :root {
             --primary: #0071e3;
@@ -61,7 +61,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 1.5rem 0;
+            padding: 0.8rem 0;
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
         }
 
@@ -93,27 +93,49 @@
         }
 
         .hero-section {
-            padding: 4rem 0;
+            padding: 6rem 0;
             text-align: center;
-            background: linear-gradient(180deg, var(--white) 0%, var(--light-gray) 100%);
+            background: linear-gradient(120deg, #f5f7ff 0%, #e8f0ff 50%, #d8e6ff 100%);
             margin-bottom: 3rem;
         }
 
         .hero-title {
             font-size: var(--font-size-3xl);
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, #0071e3 0%, #42a5f5 100%);
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 60%, #4c9aff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-description {
             font-size: var(--font-size-xl);
             color: var(--dark-gray);
             max-width: 700px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            font-size: var(--font-size-lg);
+            font-weight: 500;
+            padding: 0.75rem 2.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+        }
+
+        .hero-cta-button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 113, 227, 0.4);
         }
 
         .main-content {
@@ -295,6 +317,7 @@
 
         .feature-description {
             color: var(--medium-gray);
+            line-height: 1.6;
         }
 
         footer {
@@ -350,24 +373,417 @@
                 font-size: var(--font-size-lg);
             }
             
+            .hero-cta-button {
+                font-size: var(--font-size-base);
+                padding: 0.6rem 2rem;
+            }
+            
+            .hero-section {
+                padding: 4rem 0;
+            }
+            
             .upload-section {
                 padding: 2rem;
             }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .feature {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: var(--font-size-xl);
+            }
+            
+            .section-description {
+                font-size: var(--font-size-base);
+                margin-bottom: 2rem;
+            }
+            
+            .feature-icon {
+                width: 56px;
+                height: 56px;
+                margin-bottom: 1rem;
+            }
+            
+            .steps-container {
+                flex-direction: column;
+                align-items: center;
+                margin: 2rem 0;
+            }
+            
+            .step {
+                margin-bottom: 3rem;
+                max-width: 100%;
+            }
+            
+            .step:last-child {
+                margin-bottom: 1rem;
+            }
+            
+            .step-connector {
+                display: none;
+            }
+            
+            .guide-section {
+                padding: 3rem 0 2rem;
+            }
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .navbar-logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--black);
+            margin: 0;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-items {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-items li {
+            margin: 0 1.25rem;
+        }
+
+        .nav-items li a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-items li a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta-button {
+            display: flex;
+            align-items: center;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-left: 1.5rem;
+        }
+
+        .nav-cta-button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 113, 227, 0.3);
+        }
+
+        .free-tag {
+            background-color: rgba(255, 255, 255, 0.25);
+            font-size: 0.75rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--black);
+            margin: 3px 0;
+            border-radius: 3px;
+        }
+
+        /* 响应式导航调整 */
+        @media (max-width: 768px) {
+            .nav-items {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .navbar-links {
+                display: flex;
+                align-items: center;
+            }
+            
+            .nav-cta-button {
+                font-size: 0.85rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-cta-button {
+                display: none;
+            }
+        }
+
+        /* 移动菜单展开样式 */
+        @media (max-width: 768px) {
+            .nav-items.show-mobile-menu {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                padding: 1rem 0;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+            
+            .nav-items.show-mobile-menu li {
+                margin: 0.5rem 1.5rem;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+                transition: transform 0.3s ease;
+            }
+        }
+
+        .features-section {
+            padding: 3rem 0;
+            text-align: center;
+            background-color: transparent;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: var(--font-size-lg);
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            padding: 2rem;
+            background-color: var(--white);
+            border-radius: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background-color: rgba(0, 113, 227, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .feature-description {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+        
+        /* 使用流程区块样式 */
+        .guide-section {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .steps-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 0 1rem;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
+        }
+        
+        .step-content {
+            text-align: center;
+        }
+        
+        .step-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--black);
+        }
+        
+        .step-description {
+            color: var(--medium-gray);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+        }
+        
+        .step-connector {
+            height: 2px;
+            flex-grow: 0;
+            flex-shrink: 0;
+            width: 60px;
+            background-color: var(--light-gray);
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        .step-connector::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid var(--light-gray);
+            border-right: 2px solid var(--light-gray);
+            transform: rotate(45deg);
+        }
+        
+        .guide-cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
+            margin-top: 1rem;
+        }
+        
+        .guide-cta-button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 113, 227, 0.3);
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>AudioBreath <span class="free-badge">100% FREE</span></h1>
-            <p class="description">Professional tool for podcast creators and audiobook producers. No registration required.</p>
+            <nav class="navbar">
+                <div class="navbar-logo">
+                    <h1>BreathCut <span class="free-badge">FREE</span></h1>
+                </div>
+                <div class="navbar-links">
+                    <ul class="nav-items">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#guide">Guide</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                    <a href="#" class="nav-cta-button">
+                        <span>Start Now</span>
+                        <span class="free-tag">FREE</span>
+                    </a>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
         </div>
     </header>
 
     <section class="hero-section">
         <div class="container">
-            <h2 class="hero-title">Remove Breaths From Your Audio</h2>
-            <p class="hero-description">Automatically detect and remove breathing sounds and pauses with our AI-powered technology.</p>
+            <h2 class="hero-title">Professional Breath Removal Tool</h2>
+            <p class="hero-description">Enhance your podcasts and audiobooks with studio-quality sound. No technical skills required.</p>
+            <a href="#upload" class="hero-cta-button">Start Processing</a>
         </div>
     </section>
 
@@ -377,7 +793,7 @@
                 <p>✓ Completely free to use. No registration, no limitations.</p>
             </div>
             
-            <div class="upload-section" id="dropZone">
+            <div id="upload" class="upload-section" data-dropzone>
                 <input type="file" id="audioInput" accept=".mp3,.wav,.ogg,.aac,.flac,.m4a" style="display: none;">
                 <button class="button" onclick="document.getElementById('audioInput').click()">
                     Select Audio File
@@ -418,26 +834,98 @@
                 <div class="progress-bar"></div>
             </div>
             
-            <div class="features">
-                <div class="feature">
-                    <h3 class="feature-title">Fast Processing</h3>
-                    <p class="feature-description">Process your audio files quickly and efficiently in your browser.</p>
+            <div id="features" class="features-section">
+                <h2 class="section-title">Why Choose BreathCut</h2>
+                <p class="section-description">Our tool is designed to make your audio production workflow faster and easier</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                        </div>
+                        <h3 class="feature-title">Fast Processing</h3>
+                        <p class="feature-description">Process your audio files quickly and efficiently in your browser with our optimized algorithms.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </div>
+                        <h3 class="feature-title">Privacy First</h3>
+                        <p class="feature-description">All processing happens locally in your browser. Your files never leave your computer or get uploaded to any server.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                        </div>
+                        <h3 class="feature-title">Professional Results</h3>
+                        <p class="feature-description">Achieve studio-quality audio with our advanced breath detection algorithm that intelligently identifies and removes unwanted sounds.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                        <h3 class="feature-title">Time Saving</h3>
+                        <p class="feature-description">Save hours of manual editing with automatic breath detection and removal, letting you focus on creating great content.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <h3 class="feature-title">For All Creators</h3>
+                        <p class="feature-description">Whether you're a podcaster, audiobook narrator, or content creator - our tool is designed to meet your specific needs.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        </div>
+                        <h3 class="feature-title">Fine Control</h3>
+                        <p class="feature-description">Adjust sensitivity and other parameters to fine-tune the breath detection process for optimal results with any audio source.</p>
+                    </div>
                 </div>
-                <div class="feature">
-                    <h3 class="feature-title">Privacy First</h3>
-                    <p class="feature-description">All processing happens locally. Your files never leave your computer.</p>
+            </div>
+            
+            <div id="guide" class="guide-section">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-description">Remove breathing sounds from your audio in three simple steps</p>
+                
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Upload Your Audio</h3>
+                            <p class="step-description">Select or drag and drop your audio file. We support MP3, WAV, OGG, AAC, FLAC and M4A formats.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-connector"></div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Adjust Parameters</h3>
+                            <p class="step-description">Fine-tune detection sensitivity and other settings to get the best results for your specific audio.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-connector"></div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Process & Download</h3>
+                            <p class="step-description">Click "Remove Breaths" to process your audio, preview the results, and download your clean audio file.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature">
-                    <h3 class="feature-title">Professional Results</h3>
-                    <p class="feature-description">Achieve studio-quality audio with our advanced breath detection algorithm.</p>
-                </div>
+                
+                <a href="#upload" class="guide-cta-button">Try It Now</a>
             </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <p>© 2024 AudioBreath | Completely free and no registration required | Contact: support@example.com</p>
+            <p>© 2024 BreathCut | Completely free and no registration required | Contact: support@example.com</p>
         </div>
     </footer>
 
@@ -450,5 +938,19 @@
     }
     </script>
     <script type="module" src="./src/main.js"></script>
+    <script>
+        // 移动菜单切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const navItems = document.querySelector('.nav-items');
+            
+            if (mobileMenuToggle && navItems) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navItems.classList.toggle('show-mobile-menu');
+                    mobileMenuToggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
