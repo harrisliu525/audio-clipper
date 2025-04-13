@@ -12,7 +12,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BreathCut | Professional Breath Removal Tool</title>
+    <title>BreathCut | Remove Breathing from Audio</title>
     <style>
         :root {
             --primary: #0071e3;
@@ -322,9 +322,134 @@
 
         footer {
             text-align: center;
-            padding: 3rem 0;
+            padding: 4rem 0 2rem;
             color: var(--medium-gray);
             background-color: var(--light-gray);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 3rem;
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-brand h3 {
+            color: var(--black);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-tagline {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .footer-copyright {
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-links-column h4 {
+            color: var(--black);
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links-column ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links-column li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links-column a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links-column a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-contact h4 {
+            color: var(--black);
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-contact a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: var(--white);
+            border-radius: 50%;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-legal a {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-legal a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-note {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
         }
 
         .free-notice {
@@ -431,6 +556,46 @@
             
             .guide-section {
                 padding: 3rem 0 2rem;
+            }
+            
+            .cta-section {
+                padding: 3rem 1.5rem;
+                margin-top: 3rem;
+            }
+            
+            .cta-title {
+                font-size: 1.75rem;
+            }
+            
+            .cta-description {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .cta-button {
+                font-size: 1rem;
+                padding: 0.8rem 2rem;
+            }
+            
+            /* FAQ响应式 */
+            .faq-section {
+                padding: 3rem 0 2rem;
+            }
+            
+            .faq-container {
+                padding: 0 1rem;
+            }
+            
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+            
+            .faq-question {
+                padding: 1.25rem;
+            }
+            
+            .faq-answer p {
+                font-size: 0.95rem;
             }
         }
 
@@ -579,6 +744,35 @@
             .mobile-menu-toggle.active span:nth-child(3) {
                 transform: rotate(-45deg) translate(5px, -6px);
                 transition: transform 0.3s ease;
+            }
+            
+            /* 底部信息区响应式 */
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .footer-legal {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+        
+        /* 中等屏幕底部信息区响应式 */
+        @media (min-width: 769px) and (max-width: 1023px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-contact {
+                grid-column: span 2;
+                margin-top: 1rem;
             }
         }
 
@@ -749,6 +943,284 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(0, 113, 227, 0.3);
         }
+        
+        /* FAQ区块样式 */
+        .faq-section {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+        
+        .faq-item {
+            background-color: var(--white);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            text-align: left;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--black);
+            margin: 0;
+            padding-right: 2rem;
+        }
+        
+        .faq-icon {
+            position: absolute;
+            right: 1.5rem;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .faq-icon::before,
+        .faq-icon::after {
+            content: "";
+            position: absolute;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-icon::before {
+            width: 2px;
+            height: 20px;
+            top: 0;
+            left: 9px;
+        }
+        
+        .faq-icon::after {
+            width: 20px;
+            height: 2px;
+            top: 9px;
+            left: 0;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-answer p {
+            margin: 0;
+            padding: 0.5rem 0 1.5rem;
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-question {
+            border-bottom-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-item.active .faq-icon::before {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+        }
+        
+        /* CTA区块样式 */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 1rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem;
+        }
+        
+        .cta-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='pattern' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='2'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23pattern)'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 1rem 3rem;
+            border-radius: 3rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 客户评价区块样式 */
+        .testimonials-section {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 1px solid var(--light-gray);
+            background-color: var(--white);
+        }
+        
+        .testimonials-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 350px;
+            text-align: left;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-rating {
+            color: #FFB400;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+        
+        .testimonial-text {
+            color: var(--dark-gray);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+        
+        .testimonial-info h4 {
+            color: var(--black);
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 0.25rem;
+        }
+        
+        .testimonial-info p {
+            color: var(--medium-gray);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        /* 移动端响应式样式 */
+        @media screen and (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+
+            /* 客户评价区块移动端样式 */
+            .testimonials-section {
+                padding: 3rem 1rem 2rem;
+            }
+            
+            .testimonials-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            
+            .testimonial {
+                max-width: 100%;
+                padding: 1.5rem;
+            }
+            
+            .testimonial-rating {
+                font-size: 1.1rem;
+            }
+            
+            .testimonial-text {
+                font-size: 0.95rem;
+            }
+            
+            .testimonial-avatar {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .testimonial-info h4 {
+                font-size: 0.95rem;
+            }
+            
+            .testimonial-info p {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -781,8 +1253,8 @@
 
     <section class="hero-section">
         <div class="container">
-            <h2 class="hero-title">Professional Breath Removal Tool</h2>
-            <p class="hero-description">Enhance your podcasts and audiobooks with studio-quality sound. No technical skills required.</p>
+            <h2 class="hero-title">Automatically Remove Breathing from Audio</h2>
+            <p class="hero-description">Automatically remove distracting breath sounds, filler words, and awkward pauses from your recordings with just one click.</p>
             <a href="#upload" class="hero-cta-button">Start Processing</a>
         </div>
     </section>
@@ -920,12 +1392,186 @@
                 
                 <a href="#upload" class="guide-cta-button">Try It Now</a>
             </div>
+            
+            <div id="testimonials" class="testimonials-section">
+                <h2 class="section-title">What Our Users Say</h2>
+                <p class="section-description">Join thousands of content creators who trust BreathCut</p>
+                
+                <div class="testimonials-container">
+                    <div class="testimonial">
+                        <div class="testimonial-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="testimonial-text">"BreathCut saved me hours of editing time on my podcast. What used to take me 2-3 hours now takes just minutes. The breath detection is impressively accurate!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">JM</div>
+                            <div class="testimonial-info">
+                                <h4>James Mitchell</h4>
+                                <p>Podcast Host, The Tech Review</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial">
+                        <div class="testimonial-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="testimonial-text">"As a voice-over artist, breath noise removal is essential. BreathCut has become my go-to tool before sending files to clients. Professional quality without the professional price tag!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">SL</div>
+                            <div class="testimonial-info">
+                                <h4>Sarah Lee</h4>
+                                <p>Voice-Over Artist</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial">
+                        <div class="testimonial-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="testimonial-text">"I was skeptical about an online tool handling my audiobook narration, but BreathCut exceeded my expectations. The customizable sensitivity settings let me get exactly the results I need."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">DP</div>
+                            <div class="testimonial-info">
+                                <h4>David Peterson</h4>
+                                <p>Audiobook Narrator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="faq" class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-description">Got questions? We've got answers.</p>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does BreathCut detect breathing sounds?</h3>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>BreathCut uses advanced audio analysis algorithms to detect breathing sounds based on their unique acoustic signatures. Our technology analyzes the audio waveform's energy levels, frequency patterns, and duration to identify breathing sounds with high accuracy. You can adjust the sensitivity to fine-tune detection for your specific recording environment.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Will removing breaths make my audio sound unnatural?</h3>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Not at all! BreathCut is designed to remove breathing sounds while maintaining natural speech rhythm and flow. Rather than creating abrupt cuts, the tool intelligently adjusts the timing to ensure your audio sounds professional and natural. You can also control the pause duration to match your preference for pacing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is there a limit to the file size I can process?</h3>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We recommend keeping files under 100MB for optimal browser performance, as all processing happens locally on your device. For longer recordings, you may want to split your audio into smaller segments before processing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Are my audio files uploaded to your servers?</h3>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No. BreathCut processes your audio entirely within your browser. Your files never leave your computer or get uploaded to any server, ensuring complete privacy and security for your content.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What audio formats are supported?</h3>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>BreathCut supports most common audio formats including MP3, WAV, OGG, AAC, FLAC, and M4A. Processed files are downloaded in high-quality WAV format to preserve audio fidelity.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is BreathCut really completely free?</h3>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! BreathCut is 100% free to use with no hidden fees, account creation, or premium features. We believe in making professional audio tools accessible to everyone. The tool is supported by minimal, non-intrusive advertising.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Enhance Your Audio?</h2>
+                <p class="cta-description">Get studio-quality results in minutes. No registration required.</p>
+                <a href="#upload" class="cta-button">Get Started Free</a>
+            </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <p>© 2024 BreathCut | Completely free and no registration required | Contact: support@example.com</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>BreathCut</h3>
+                    <p class="footer-tagline">Professional breath removal tool for content creators</p>
+                    <p class="footer-copyright">© 2025 BreathCut. All rights reserved.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h4>Product</h4>
+                        <ul>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#guide">How It Works</a></li>
+                            <li><a href="#faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Tutorials</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>Email: <a href="mailto:harrisliu55@gmail.com">harrisliu55@gmail.com</a></p>
+                    
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+                <p class="footer-note">BreathCut is 100% free to use. No registration required.</p>
+            </div>
         </div>
     </footer>
 
@@ -950,6 +1596,65 @@
                     mobileMenuToggle.classList.toggle('active');
                 });
             }
+            
+            // 底部信息区响应式布局
+            function adjustFooter() {
+                const footerContent = document.querySelector('.footer-content');
+                const footerBottom = document.querySelector('.footer-bottom');
+                const footerLegal = document.querySelector('.footer-legal');
+                const footerContact = document.querySelector('.footer-contact');
+                
+                if (window.innerWidth <= 768) {
+                    footerContent.style.gridTemplateColumns = '1fr';
+                    footerContent.style.gap = '2rem';
+                    footerBottom.style.flexDirection = 'column';
+                    footerBottom.style.gap = '1.5rem';
+                    footerLegal.style.flexWrap = 'wrap';
+                    footerLegal.style.justifyContent = 'center';
+                    footerLegal.style.gap = '1rem';
+                } else if (window.innerWidth <= 1023) {
+                    footerContent.style.gridTemplateColumns = '1fr 1fr';
+                    footerContact.style.gridColumn = 'span 2';
+                    footerContact.style.marginTop = '1rem';
+                    footerBottom.style.flexDirection = '';
+                    footerLegal.style.flexWrap = '';
+                } else {
+                    footerContent.style.gridTemplateColumns = '1fr 2fr 1fr';
+                    footerContent.style.gap = '3rem';
+                    footerContact.style.gridColumn = '';
+                    footerContact.style.marginTop = '';
+                    footerBottom.style.flexDirection = '';
+                    footerBottom.style.gap = '';
+                    footerLegal.style.flexWrap = '';
+                    footerLegal.style.justifyContent = '';
+                    footerLegal.style.gap = '';
+                }
+            }
+            
+            // 初始调整
+            adjustFooter();
+            
+            // 窗口大小变化时调整
+            window.addEventListener('resize', adjustFooter);
+            
+            // FAQ折叠面板功能
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // 关闭其他打开的FAQ
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // 切换当前FAQ的状态
+                    item.classList.toggle('active');
+                });
+            });
         });
     </script>
 </body>
